@@ -62,7 +62,9 @@ public class LauncherActivity extends AppCompatActivity {
     }
 
     private void sendUserToHomeActivity() {
-        Toast.makeText(this, "Home Screen", Toast.LENGTH_SHORT).show();
+       Intent in = new Intent(this,HomeActivity.class);
+        in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in);
     }
 
     private void sendUserToLogInActivity() {

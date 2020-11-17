@@ -2,6 +2,7 @@ package com.example.hardwarewale;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import com.example.hardwarewale.bean.Category;
 import com.example.hardwarewale.bean.Product;
 import com.example.hardwarewale.databinding.HomeScreenBinding;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 import java.util.ArrayList;
@@ -39,18 +42,20 @@ import retrofit2.Response;
 public class HomeActivity extends AppCompatActivity {
     HomeScreenBinding homeBinding;
     CategoryAdapter categoryAdapter, categoryAdapter1;
-    //ExpandableListView list;
     DiscountAdapter discountAdapter;
     RecentUpdateAdapter recentUpdateAdapter;
     ActionBarDrawerToggle toggle;
     ArrayList<Category> categoryList;
     String name = "";
-
+    SharedPreferences sp = null;
+    FirebaseUser currentUser;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         homeBinding = HomeScreenBinding.inflate(LayoutInflater.from(HomeActivity.this));
         setContentView(homeBinding.getRoot());
+        sp = getSharedPreferences("user",MODE_PRIVATE);
+
         setSupportActionBar(homeBinding.toolbar);
         getNavigationDrawer();
         showDiscountedProducts();
@@ -58,6 +63,28 @@ public class HomeActivity extends AppCompatActivity {
         showCategories();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser==null)
+            sendUserToLoginActivity();
+        else if(checkUserProfile())
+              sendUserToProfileActivity();
+    }
+    private  boolean checkUserProfile(){
+        String status = sp.getString("userId","");
+        return status.equals("");
+    }
+    public void sendUserToProfileActivity(){
+        Intent in = new Intent(this,ProfileActivity.class);
+        startActivity(in);
+    }
+    private void sendUserToLoginActivity(){
+        Intent in = new Intent(HomeActivity.this,LogInActivity.class);
+        startActivity(in);
+        finish();
+    }
     private void showCategories() {
         if (isConnectedToInternet(this)) {
             Toast.makeText(this, "Internet Connected", Toast.LENGTH_SHORT).show();
@@ -121,20 +148,10 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                     ArrayList<Product> recentProductList = response.body();
-                    //for (Product p : recentProductList)
-                    //     Log.e("Product", "===>" + p.getName());
                     recentUpdateAdapter = new RecentUpdateAdapter(HomeActivity.this, recentProductList);
                     homeBinding.rvHomeRecentUpdates.setAdapter(recentUpdateAdapter);
                     homeBinding.rvHomeRecentUpdates.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
-                   /* recentUpdateAdapter.setOnItemClick(new RecentUpdateAdapter.OnRecyclerViewClick() {
-                        @Override
-                        public void onItemClick(Product product, int position) {
-                            Intent in = new Intent(HomeActivity.this, ProductDescriptionActivity.class);
-                            in.putExtra("product",product);
-                            startActivity(in);
-                        }
-                    });*/
                 }
 
                 @Override
