@@ -24,5 +24,4 @@
         <activity android:name=".ProductDescriptionActivity"/>
         <activity android:name=".CategoryActivity"/>
     </application>
-
 </manifest>

@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#6200EE</color>
@@ -10,7 +11,6 @@
     <color name="voilet">#673AB7</color>
     <color name="light_green">#8BC34A</color>
     <color name="dark_green">#4CAF50</color>
-    <!--color name="yellow">#FCC703</color-->
     <color name="yellow">#FACC43</color>
     <color name="brown">#A35404</color>
 </resources>
