@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/yellow"
+        android:id="@+id/view"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/profile_logo"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/civImage"
+        app:civ_border_color="@color/black"
+
+        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/yellow"
+        android:layout_below="@id/civImage"
+        android:layout_marginTop="-30dp"
+        android:id="@+id/etbtnEdit"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Name"
+        android:inputType="text"
+        android:textColorHint="@color/black"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/black"
+        android:layout_below="@id/etbtnEdit"
+        android:id="@+id/etName"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/black"
+        android:layout_margin="15dp"
+        android:hint="Mobile"
+        android:inputType="number"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/black"
+        android:layout_below="@id/etName"
+        android:id="@+id/etMobile"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_below="@id/etMobile"
+        android:id="@+id/etEmail"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Address"
+        android:inputType="text"
+        android:backgroundTint="@color/yellow"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_below="@id/etEmail"
+        android:id="@+id/etAddress"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etAddress"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_decoration"
+        android:text="Update Now"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:id="@+id/btnSave"/>
+
+
+</RelativeLayout>
+</ScrollView>

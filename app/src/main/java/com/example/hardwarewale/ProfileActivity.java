@@ -72,8 +72,8 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         awesomeValidation.addValidation(binding.etName, "[^\\s*$][a-zA-Z\\s]+", "Enter correct name");
-        awesomeValidation.addValidation(binding.etEmail, Patterns.EMAIL_ADDRESS, "Enter correct Email");
         awesomeValidation.addValidation(binding.etMobile, "^[0-9]{10}$", "Enter correct  Mobile number");
+        awesomeValidation.addValidation(binding.etEmail, Patterns.EMAIL_ADDRESS, "Enter correct Email");
         awesomeValidation.addValidation(binding.etAddress, "[^\\s*$][a-zA-Z0-9,/\\s]+", "Enter correct Address");
 
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
@@ -84,10 +84,10 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.e("VALIDATION", "" + awesomeValidation.validate());
 
                     if (awesomeValidation.validate()) {
-                        String address = binding.etAddress.getText().toString().trim();
-                        String email = binding.etEmail.getText().toString().trim();
                         String name = binding.etName.getText().toString().trim();
                         String mobile = binding.etMobile.getText().toString().trim();
+                        String email = binding.etEmail.getText().toString().trim();
+                        String address = binding.etAddress.getText().toString().trim();
                         String token = "tok_qe2k3";
                         if (imageUri != null) {
                             File file = FileUtils.getFile(ProfileActivity.this, imageUri);
@@ -99,9 +99,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                             MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
                             RequestBody username = RequestBody.create(okhttp3.MultipartBody.FORM, name);
-                            RequestBody useraddress = RequestBody.create(okhttp3.MultipartBody.FORM, address);
+                            RequestBody usermobile =RequestBody.create(okhttp3.MultipartBody.FORM, mobile);
                             RequestBody useremail = RequestBody.create(okhttp3.MultipartBody.FORM, email);
-                            RequestBody usermobile = RequestBody.create(okhttp3.MultipartBody.FORM, mobile);
+                            RequestBody useraddress=   RequestBody.create(MultipartBody.FORM,address);
                             RequestBody usertoken = RequestBody.create(okhttp3.MultipartBody.FORM, token);
 
                             UserService.UserApi userApi = UserService.getUserApiInstance();
@@ -113,13 +113,13 @@ public class ProfileActivity extends AppCompatActivity {
                                         User user = response.body();
                                         Toast.makeText(ProfileActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                         SharedPreferences.Editor editor = sp.edit();
+                                        editor.putString("imageUrl", user.getImageUrl());
                                         editor.putString("name", user.getName());
+                                        editor.putString("mobile", user.getAddress());
+                                        editor.putString("email", user.getEmail());
+                                        editor.putString("address", user.getMobile());
                                         editor.putString("token", user.getToken());
                                         editor.putString("userId", user.getUserId());
-                                        editor.putString("mobile", user.getMobile());
-                                        editor.putString("imageUrl", user.getImageUrl());
-                                        editor.putString("address", user.getAddress());
-                                        editor.putString("email", user.getEmail());
                                         editor.commit();
                                         finish();
                                     } else

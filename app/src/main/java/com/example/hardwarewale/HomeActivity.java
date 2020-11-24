@@ -213,7 +213,10 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this, "Cart clicked", Toast.LENGTH_SHORT).show();
                 }
                 else if (id == R.id.menuSetting) {
-                    Toast.makeText(HomeActivity.this, "Setting clicked", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(HomeActivity.this, "Setting clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent  = new Intent(HomeActivity.this,SeattingActivty.class);
+                    startActivity(intent);
+
                 }
                 else if (id == R.id.menuFavorites) {
                     Toast.makeText(HomeActivity.this, "Favorites clicked", Toast.LENGTH_SHORT).show();

@@ -16,17 +16,20 @@
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LauncherActivity">
+
+<activity android:name=".SeattingActivty">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity"/>
-        <activity android:name=".ProfileActivity"/>
         <activity android:name=".LogInActivity"/>
         <activity android:name=".ProductActivity"/>
         <activity android:name=".ProductDescriptionActivity"/>
         <activity android:name=".CategoryActivity"/>
-    </application>
+        <activity android:name=".ProfileActivity"/>
+    <activity android:name=".LauncherActivity"/>
+</application>
 </manifest>
